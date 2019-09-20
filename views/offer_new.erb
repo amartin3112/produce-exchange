@@ -1,0 +1,76 @@
+<h1>MAKE AN OFFER</h1>
+<section class="offer-card card">
+  <%@photos.each do |photo|%>
+    <img src="<%=photo.image_link%>" class="large">
+  <% end %>
+  <h4 class="offer-statment"><%=@reviewer_item.user.username%>  has <%=@reviewer_item.quantity%><%=@reviewer_item.unit%> <%=@reviewer_item.title%></h4>
+</section>
+
+<section class="your-offers card ">
+  <label for="your-offers">These are your items</label>
+  <% @proposed_items.each do |item| %>
+    <p><%=item.quantity%> <%=item.unit%> <%=item.title%></p>
+  <% end %>
+</section>
+<section class="make-offer-form card">
+  <form action="/offers/new" method="post">
+    <label for="">What would you like to offer</label>
+    <select name="item_id" id="" class="select-item u-full-width" required>
+      <option value="" disabled selected >Choose from your list</option>
+      <% @proposed_items.each do |item| %>
+        <option name="item_id" value="<%=item.id%>"><%=item.title%></option>
+      <% end %>
+    </select>
+    <div class="qty-box">
+      <input class="offer-qty" type="number" step=".01" min=0 name="qty" placeholder="quantity" required>
+      <p class="offer-unit">unit</p>
+    </div>
+
+    <label for="meeting_point">Meeting point</label>
+    <select name="meeting_point" id="" class="meeting-point u-full-width">
+      <option value="yours">your location</option>
+      <option value="theirs">their location</option>
+      <option value="elsewhere">elsewhere</option>
+    </select>
+    <input type="text" name="elsewhere" placeholder="Suggest elsewhere" class="elsewhere-field u-full-width hide">
+    <input type="hidden" name="reviewer_item_id" value="<%=@reviewer_item.id%>">
+    <div class="make-add-buttons">
+      <button>make offer</button>
+      <form action="/items/new">
+        <button>Add item</button>
+      </form>
+    </div>
+  </form>
+
+</section>
+
+<script>
+
+var selectItem = document.querySelector('.select-item')
+var offerQty = document.querySelector('.offer-qty')
+var offerUnit = document.querySelector('.offer-unit')
+var selectMeetingPoint = document.querySelector('.meeting-point')
+var elsewhereField = document.querySelector('.elsewhere-field')
+
+var selectFromYourItems = event => {
+
+  var options = {
+    url: '/api/items',
+    data: { item_id: event.target.value }
+  }
+  var getItemDetails = resp => {
+    offerQty.max = resp.item_qty
+    offerUnit.textContent = resp.item_units
+  }
+  $.ajax(options).done(getItemDetails)
+}
+
+var setMeetingPoint = event => {
+  if (event.target.value == 'elsewhere') {
+    elsewhereField.classList.remove('hide')
+  }
+}
+
+selectMeetingPoint.addEventListener('change', setMeetingPoint)
+selectItem.addEventListener('change', selectFromYourItems)
+</script>

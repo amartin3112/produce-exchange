@@ -1,0 +1,13 @@
+<h1>EDIT OFFER</h1>
+<form action="/offers/<%=@offer.id%>" method="post">
+  <input type="hidden" name="_method" value="put">
+  <input class="u-full-width" type="text" name="title" placeholder="<%=@offer.proposer_item.title%>">
+  <input class="u-full-width" type="text" name="quantity" placeholder="<%=@offer.proposer_item_qty%>">
+  <input class="u-full-width" type="text" name="unit" placeholder="<%=@offer.proposer_item.unit%>">
+  <button>UPDATE</button>
+</form>
+
+<form action="/offers/<%=@offer.id%>" method="post">
+  <input type="hidden" name='_method' value='delete'>
+  <button>DELETE</button>
+</form>

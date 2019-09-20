@@ -1,1 +1,122 @@
-<h1>hello world</h1>
+<main>
+  <section class=filters>
+    <% if logged_in? %>
+      <button class="my-items-btn u-full-width">My Items</button>
+      <form class="distance-form" action="">
+        <label>Sort by Distance</label>
+        <input class="distance-input u-full-width" type="text" placeholder="Kilometres">
+        <button class="distance-btn u-full-width">Filter</button>
+      </form>
+    <% end %>
+  </section>
+
+  <section class="items">
+    <% @items.each do |item| %>
+    <div class="offer-card card">
+      <a href="/items/<%= item.id %>">
+        <h3><%= item.title %></h3>
+        <img src="<%= item.photos.first.image_link %>" class="large">
+      </a>
+      <p class="align-left">Number of offers: <%= item.reviewer_offers.length %></p>
+    </div>
+    <% end %>
+  </section>
+</main>
+
+
+<script>
+  const myItemsBtn = document.querySelector('.my-items-btn')
+  const itemContainer = document.querySelector('.items')
+
+  const distanceInput = document.querySelector('.distance-input')
+  const distanceBtn = document.querySelector('.distance-btn')
+
+  const removeAllItems = () => {
+    $('.items').empty()
+  }
+
+  const addItemsToDom = response => {
+    response.forEach(item => {
+      if (item.quantity > 0) {
+        const div = document.createElement('div')
+        div.classList.add('offer-card')
+        div.classList.add('card')
+
+        const anchor = document.createElement('a')
+        anchor.href = `/items/${item.id}`
+
+        const heading = document.createElement('h3')
+        heading.textContent = item.title
+        anchor.appendChild(heading)
+
+        const image = document.createElement('img')
+        image.src = item.url
+        image.classList.add('large')
+        anchor.appendChild(image)
+
+        div.appendChild(anchor)
+
+        const paragraph = document.createElement('p')
+        paragraph.textContent = `Number of offers:${item.offers}`
+        div.appendChild(paragraph)
+
+        itemContainer.appendChild(div)
+      }
+    });
+  };
+
+  const getMyItems = () => {
+    $.ajax({url: '/api/my_items'}).done(response => {
+      addItemsToDom(response)
+    })
+  }
+
+  const showMyItems = () => {
+    removeAllItems()
+    getMyItems()
+  }
+
+  const addItemByDistance = response => {
+      response.forEach(item => {
+        const div = document.createElement('div')
+        div.classList.add('offer-card')
+        div.classList.add('card')
+
+        const anchor = document.createElement('a')
+        anchor.href = `/items/${item.id}`
+
+        const heading = document.createElement('h3')
+        heading.textContent = item.title
+        anchor.appendChild(heading)
+
+        const image = document.createElement('img')
+        image.src = item.photos[0].image_link.url
+        image.classList.add('large')
+        anchor.appendChild(image)
+
+        const distance = document.createElement('p')
+        distance.textContent = Math.round(item.distance) + "km away"
+        anchor.appendChild(distance)
+
+        div.appendChild(anchor)
+        itemContainer.appendChild(div)
+      })
+  };
+
+  const getItemsByDistance = () => {
+    $.ajax({url: `/api/sort_by_distance/${distanceInput.value}`}).done(response => {
+      addItemByDistance(response)
+    })
+  }
+
+  const sortByDistance = () => {
+    event.preventDefault()
+    removeAllItems()
+    getItemsByDistance()
+  }
+
+  myItemsBtn.addEventListener('click', showMyItems)
+
+  distanceBtn.addEventListener('click', sortByDistance)
+
+</script>

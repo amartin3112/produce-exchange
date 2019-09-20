@@ -1,0 +1,366 @@
+:root {
+  --text: #333333;
+
+  --main: #f68787;
+  --secondary: #ffba92;
+  --tertiary: #e0f5b9;
+  --quarternary: #fcfca8;
+
+  --main-hover: #ff8080;
+  --secondary-hover: #f8a978;
+  --tertiary-hover: #f1eb9a;
+  --quarternary-hover: #a4f6a5;
+}
+
+* {
+  color: var(--text);
+}
+
+img {
+  width: 100%;
+  border-radius: 2rem;
+  margin-left: auto;
+  margin-right: auto;
+  max-height: 60vmin;
+  object-fit: cover;
+}
+
+a {
+  text-decoration: none;
+  color: var(--text);
+}
+
+.hide {
+  display: none;
+}
+
+body {
+  background-color: var(--main);
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+button {
+  background-color: var(--quarternary);
+  border-color: var(--quarternary);
+  color: var(--text);
+  border: 0px;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  margin: 0 auto;
+  background-color: var(--tertiary);
+}
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  overflow: hidden;
+}
+
+nav a {
+  padding: 0.5em;
+  color: var(--text);
+}
+
+p {
+  font-size: 1.8rem;
+}
+
+.align-right {
+  text-align: left;
+}
+
+.side-by-side {
+  display: flex;
+  width: 100%;
+  box-sizing: content-box;
+  justify-content: space-between;
+}
+
+.offer-photo {
+  width: 46%;
+  margin: 1.5rem auto;
+  object-fit: contain;
+}
+
+.main-header {
+  background-color: var(--tertiary);
+  padding: 0.5em;
+  margin-bottom: 2rem;
+  color: var(--main);
+  text-align: left;
+}
+
+.main-header p {
+  margin-bottom: 0;
+}
+
+/* Cliftons CSS Begin */
+
+/* Item_show Page */
+/* Here is where i converted my edit hyperlink into a button */
+
+.edit-btn {
+  display: inline-block;
+  height: 38px;
+  padding: 0 30px;
+  color: var(--text);
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 38px;
+  letter-spacing: .1rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  background-color: var(--quarternary);
+  border-radius: 4px;
+  border: 1px solid #bbb;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.edit-btn:hover {
+  color: #333;
+  border-color: #888;
+  outline: 0;
+}
+
+.delete-form {
+  display: inline;
+}
+
+.info-box {
+  margin: 1em;
+  padding: 2.5rem;
+  text-align: left;
+  border-radius: 2rem;
+  background-color: white;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.show-img {
+  margin: 1em;
+  display: flex;
+  justify-content: center;
+}
+
+.itm-show-but-container {
+  margin: 1em;
+}
+
+.itm-shw-heading {
+  text-align: center;
+  margin-top: 2.5rem;
+}
+
+/* Item_Edit Page */
+
+.edit-heading,
+.new-heading {
+  margin-top: 1rem;
+}
+
+/* Item_New Page */
+
+.choose-file {
+  display: inline-block;
+  height: 38px;
+  color: var(--text);
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: .1rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  background-color: var(--quarternary);
+  border-radius: 4px;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.choose-file:hover {
+    color: #333;
+    border-color: #888;
+    outline: 0;
+}
+/* Cliftons CSS End  */
+.filter-offers {
+  display: flex;
+  justify-content: space-evenly;
+  align-content: center;
+
+}
+
+.filter-offers label {
+  margin: auto 1rem;
+  color: var(--text);
+}
+.filter-offer {
+  margin-top: 2rem;
+}
+
+.card {
+  background-color: white;
+  border-radius: 2rem;
+  text-align: left;
+  text-indent: 1rem;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+  margin: 1rem;
+  display: flex;
+  /* padding: 1rem; */
+  justify-content: center;
+}
+
+.make-offer-form {
+  padding: 1rem;
+}
+.make-offer-form form {
+  width: 100%;
+}
+
+.your-offers {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.card p {
+  font-size: 1em;
+  margin: 0;
+  margin-inline-start: 0.5rem;
+  padding: 0 0.5rem 0.5rem 0.5rem;
+}
+.card h4 {
+  font-size: 1.5em;
+  text-align: center;
+}
+
+
+.confirm-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.offer-card {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+.offer-card img {
+  width: 46%;
+  margin: 2rem auto;
+}
+
+.edit-offer {
+  margin: 0 auto;
+}
+
+.statement {
+  height: 4rem;
+  border-radius: 0 0 2rem 2rem;
+  padding: 0.5em;
+}
+.reviewer.statement {
+  background: var(--quarternary);
+}
+.proposer.statement {
+  background: var(--tertiary);
+}
+
+.proposer-item h2, .review-item h2 {
+  font-size: 2.5rem;
+  text-align: center;
+}
+
+.proposer-item, .review-item {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.proposer-item img, .review-item img {
+  width: 70%;
+  margin: 0 auto;
+  display: block;
+}
+
+.offer-card .large {
+  width: 90%;
+  display: block;
+  margin: 1rem auto;
+  padding: 1rem;
+  border-radius: 0;
+}
+
+.meeting-card p {
+  padding: 1rem;
+}
+
+.qty-box {
+  display: flex;
+  align-items: baseline;
+}
+.qty-box input {
+  width: 90%;
+}
+
+.qty-box label {
+  text-align: left;
+  margin-left: 0.5em;
+}
+
+.make-add-buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+/* Ashley's CSS Begin */
+
+.fas {
+  color: var(--main);
+}
+
+.logged-in {
+  color: var(--main);
+}
+
+.distance-form {
+  margin-top: 1em;
+}
+
+.item-card {
+  margin-bottom: 1em;
+  border-radius: 2em;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  background-color: white;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.item-card img {
+  border-radius: 0;
+}
+
+.edit-user {
+  margin-bottom: 0.5em;
+}
+
+/* Ashley's CSS End  */
+.offer-count {
+  border-radius: 50%;
+}
+
+.tertiary {
+  border: 1em solid var(--tertiary);
+}
+.secondary {
+  border: 1em solid var(--secondary);
+}

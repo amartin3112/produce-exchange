@@ -1,0 +1,74 @@
+<section class="filter-offers">
+  <label for="filter-offer">Filter</label>
+  <select name="filter" class="filter-offer u-full-width">
+    <option value="all_offers">All offers</option>
+    <option value="proposer_offers">My proposed offers</option>
+    <option value="reviewer_offers">Review offers</option>
+  </select>
+</section>
+
+
+
+
+<p><%= @error_messages%></p>
+
+<section class="proposer-offers">
+  <% @proposer_offers.each do |offer| %>
+  <a href="/offer/<%=offer.id%>">
+    <div class="offer-card card secondary">
+      <div class="card-img">
+        <img src="<%=offer.reviewer_item.photos.first.image_link%>" alt="">
+        <img src="<%=offer.proposer_item.photos.first.image_link%>" alt="">
+        <p>You offered <%=offer.reviewer_user.username%> <%=offer.proposer_item.title%> for their <%=offer.reviewer_item.title%></p>
+      </div>
+      <form action="/offers/<%=offer.id%>/edit" class="edit-offer">
+        <button>EDIT OFFER</button>
+      </form>
+    </div>
+  </a>
+  <% end %>
+</section>
+
+<section class="reviewer-offers">
+  <% @reviewer_offers.each do |offer| %>
+    <a href="/offer/<%=offer.id%>">
+      <div class="offer-card card tertiary">
+        <div class="card-img">
+          <img src="<%=offer.proposer_item.photos.first.image_link%>" alt="">
+          <img src="<%=offer.reviewer_item.photos.first.image_link%>" alt="">
+          <p><%=offer.proposer_user.username%> offers <%=offer.proposer_item.title%> for your <%=offer.reviewer_item.title%></p>
+        </div>
+      </div>
+    </a>
+  <% end %>
+</section>
+
+<form action="/offers/accepted">
+  <button>ACCEPTED OFFERS</button>
+</form>
+
+<script>
+  var filterDropdown = document.querySelector('.filter-offer')
+  var proposerOffer = document.querySelector('.proposer-offers')
+  var reviewerOffer = document.querySelector('.reviewer-offers')
+
+  var filter = function (event){
+    switch (event.target.options.selectedIndex){
+      case 0:
+        proposerOffer.classList.remove('hide')
+        reviewerOffer.classList.remove('hide')
+        break;
+      case 1:
+        proposerOffer.classList.remove('hide')
+        reviewerOffer.classList.add('hide')
+        break;
+      case 2:
+        proposerOffer.classList.add('hide')
+        reviewerOffer.classList.remove('hide')
+        break;
+    }
+  }
+
+  filterDropdown.addEventListener('change', filter)
+</script>
+

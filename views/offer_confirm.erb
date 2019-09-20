@@ -1,0 +1,48 @@
+<h2>Confirm Offer</h2>
+
+<div class="confirm-conatiner">
+  <% if @offer.proposer_user_id === current_user.id%>
+    <form action="/offers/<%=@offer.id%>/edit" class="edit-offer u-full-width">
+      <button>EDIT OFFER</button>
+    </form>
+  <% end %>
+  <section class="proposer-item card">
+  <% if @offer.proposer_user_id === current_user.id%>
+    <h2>Your item</h2>
+  <% else %>
+    <h2>Their item</h2>
+  <% end %>
+    <a href="/items/<%=@offer.proposer_item_id%>"><img src="<%=@offer.proposer_item.photos.first.image_link%>" class="offer-img"></a>
+    <p><%=@offer.proposer_item_qty%><%=@offer.proposer_item.unit%> <%=@offer.proposer_item.title%></p>
+    <p><%=@offer.proposer_item.user.username%></p>
+  </section>
+
+  <section class="review-item card">
+  <% if @offer.reviewer_user_id === current_user.id%>
+    <h2>Your item</h2>
+  <% else %>
+    <h2>Their item</h2>
+  <% end %>
+    <a href="/items/<%=@offer.reviewer_item_id%>"><img src="<%=@offer.reviewer_item.photos.first.image_link%>" class="offer-img"></a>
+    <p><%=@offer.reviewer_item_qty%><%=@offer.reviewer_item.unit%> <%=@offer.reviewer_item.title%></p>
+    <p><%=@offer.reviewer_item.user.username%></p>
+  </section>
+</div>
+
+<section class="meeting-point card">
+  <p>Meeting Point: <%=@offer.meeting_point_suburb%></p>
+</section>
+
+<% if @offer.reviewer_user_id == current_user.id %>
+  <div class="offer-options">
+    <form action="/offers/<%=@offer.id%>/update" method="post">
+      <input type="hidden" name="_method" value="put">
+      <input type="hidden" name="status" value="accepted">
+      <button class="accept offer">ACCEPT</button>
+    </form>
+    <form action="/offers/<%=@offer.id%>" method="post">
+       <input type="hidden" name="_method" value="delete">
+      <button class="decline offer">DECLINE</button>
+    </form>
+  </div>
+<% end %>

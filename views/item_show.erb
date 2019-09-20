@@ -1,0 +1,47 @@
+<h1 class="itm-shw-heading"><%= @item.title %> </h1>
+
+<div class="show-img">
+
+  <% @photos.each do |photo| %>
+
+  <img class="show-img" src="<%= photo.image_link %>" alt="">
+
+  <% end %>
+
+</div>
+
+<div class="info-box">
+
+  <h4>Description:</h4>
+  <p> <%= @item.description %> </p>
+
+  <h4>Quantity:</h4>
+  <p> <%= @item.quantity%> <%= @item.unit%> </p>
+  <h5>Listed By: <%= @item.user.username %></h5>
+
+</div>
+
+<div class="itm-show-but-container">
+
+  <% if logged_in? && current_user.id == @item.user_id%>
+
+    <form class="delete-form" action="/items/<%= @item.id %>" method="post">
+      <input type="hidden" name="_method" value="delete">
+      <button>delete</button>
+    </form>
+
+    <a class ="edit-btn" href="/items/<%= @item.id %>/edit">Edit Produce</a>
+
+  <% end %>
+
+  <% if logged_in? && current_user.id != @item.user_id %>
+
+    <form action="/offers/<%= @item.id%>">
+      <button>make offer</button>
+    </form>
+
+  <% end %>
+
+</div>
+
+
